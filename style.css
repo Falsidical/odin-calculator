@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800&family=Outfit:wght@100..900&family=Silkscreen&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -5,47 +7,77 @@
 }
 
 body {
-  background-color: #333;
-  color: #eee;
+  background-color: #11111b;
+  color: #cdd6f4;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'Outfit', sans-serif;
 }
 
 .calculator {
-  background-color: rgb(245, 163, 55);
+  background-color: #1e1e2e;
   border-radius: 16px;
   padding: 32px;
+  box-shadow: 16px 16px 8px rgba(0, 0, 0, 0.308);
+  border: 2px solid #ccd0da;
+}
+
+h1 {
+  margin-bottom: 16px;
+  text-shadow: 2px 2px 2px#ccd0da8f;
 }
 
 .screen {
   display: flex;
   flex-direction: column;
   background-color: #00000038;
-  margin-bottom: 8px;
+  border: 2px solid #ccd0da;
+  border-radius: 12px;
+  padding: 8px;
+  margin-bottom: 24px;
 }
 
 #number {
   text-align: right;
-  font-size: 32px;
+  font-size: 48px;
 }
 
 .buttons {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
 }
 
 button {
   font-family: inherit;
-  font-size: 16px;
-  padding: 16px;
+  color: inherit;
+  font-size: 32px;
+  padding: 8px;
   font-weight: bold;
+  background-color: #363a4f;
+  border: 2px solid #ccd0da;
+  border-radius: 12px;
+  aspect-ratio: 1;
+  transition: all 50ms linear;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.9);
+}
+
+button:nth-child(4),
+button:nth-child(5) {
+  color: white;
+  background-color: #ee6366;
 }
 
 button:last-child {
-  grid-column: span 3;
+  grid-column: span;
+  aspect-ratio: initial;
+  grid-column: span 2;
+  color: white;
 }

@@ -1,14 +1,14 @@
 import { functions } from './functions.js';
 const buttons = document.querySelectorAll('.buttons button');
 const screenNumber = document.querySelector('#number');
+const screenHistory = document.querySelector('#history');
 
 let currentNumber = 0;
-let n1 = null;
-let n2 = null;
-let operation = null;
+let history = [];
 
 function updateScreen() {
   screenNumber.textContent = currentNumber;
+  screenHistory.textContent = history.join(' ');
 }
 
 function addNumberToScreen(number) {
@@ -26,40 +26,22 @@ for (let i = 0; i <= 9; i++) {
 
 for (let i = 11; i <= 14; i++) {
   buttons[i].addEventListener('click', (e) => {
-    n1 = currentNumber;
-    operation = e.target.dataset.op;
+    history.push(currentNumber, e.target.dataset.op);
     currentNumber = 0;
     updateScreen();
   });
 }
 
 buttons[15].addEventListener('click', () => {
-  n2 = currentNumber;
-  currentNumber = functions[operation](n1, n2);
+  history.push(currentNumber);
+  currentNumber = functions[history[history.length - 2]](history[history.length - 3], history[history.length - 1]);
   updateScreen();
+  history.push(currentNumber);
 });
 
 buttons[16].addEventListener('click', () => {
   currentNumber = 0;
-  n1 = null;
-  n2 = null;
+  history = [];
   operation = null;
   updateScreen();
 });
-
-/*
-
-[2, +, 2, +, 2]
-
-n1  2
-op  +
-    =
-n2  2
-c   +
-    2
-
-+ n1=4
-
-
-
-*/
