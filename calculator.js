@@ -2,29 +2,52 @@ import { calculate } from './functions.js';
 const inputButtons = document.querySelectorAll('button[data-key]');
 const opButtons = document.querySelectorAll('button[data-op]');
 const screenResult = document.querySelector('#number');
-const screenHistory = document.querySelector('#history');
+const screenExpression = document.querySelector('#history');
 
-let insertSpace = true;
+let minusUsed = false;
+let result = 0;
+let expression = '';
+
+function updateScreen() {
+  screenResult.innerText = result;
+  screenExpression.innerText = expression;
+}
+
 function insertText(key) {
-  if (isNaN(screenHistory.innerText.slice(-1)) || isNaN(key.target.dataset.key)) insertSpace = true;
-  screenHistory.innerText += `${insertSpace ? ' ' : ''}${key.target.dataset.key}`;
+  if (expression.length && !minusUsed && (isNaN(expression.slice(-1)) || isNaN(key.target.dataset.key))) {
+    expression += ' ';
+  }
+  expression += key.target.dataset.key;
+  minusUsed = false;
+  updateScreen();
+  console.log(expression);
 }
 
 inputButtons.forEach((btn) => btn.addEventListener('click', insertText));
 
 opButtons[0].addEventListener('click', () => {
-  screenHistory.innerText += '-';
+  expression += '-';
+  minusUsed = true;
+  updateScreen();
+  console.log(expression);
 });
 
 opButtons[1].addEventListener('click', () => {
-  screenHistory.innerText = screenHistory.innerText.slice(0, -1);
+  expression = expression.slice(0, -1);
+  if (expression.slice(-1) === ' ') expression = expression.slice(0, -1);
+  updateScreen();
+  console.log(expression);
 });
 
 opButtons[2].addEventListener('click', () => {
-  screenHistory.innerText = '';
-  screenResult.innerText = '0';
+  expression = '';
+  result = '0';
+  updateScreen();
+  console.log(expression);
 });
 
 opButtons[4].addEventListener('click', () => {
-  screenResult.innerText = calculate(screenHistory.innerText);
+  result = calculate(expression);
+  updateScreen();
+  console.log(expression);
 });
