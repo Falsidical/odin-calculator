@@ -17,6 +17,7 @@ function RPNParser(expression) {
       outputQueue.push(token);
     } else if (operators[token]) {
       while (
+        operatorStack.length &&
         operators[operatorStack[operatorStack.length - 1]] &&
         ((operators[token].associativity === 'left' && operators[token].precedence <= operators[operatorStack[operatorStack.length - 1]].precedence) ||
           (operators[token].associativity === 'right' && operators[token].precedence < operators[operatorStack[operatorStack.length - 1]].precedence))
@@ -37,6 +38,7 @@ function RPNParser(expression) {
 }
 
 function evaluateRPN(tokens) {
+  console.log(tokens);
   const outputQueue = [];
 
   tokens.forEach((token) => {
@@ -53,5 +55,5 @@ function evaluateRPN(tokens) {
 }
 
 export function calculate(expression) {
-  return evaluateRPN(RPNParser(expression.replace(/([+\-x÷^()])/g, ' $1 ')));
+  return evaluateRPN(RPNParser(expression));
 }

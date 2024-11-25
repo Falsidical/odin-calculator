@@ -80,8 +80,8 @@ button:active {
   box-shadow: 0 0 0;
 }
 
-button:nth-child(4),
-button:nth-child(5) {
+button:nth-child(9),
+button:nth-child(10) {
   color: white;
   background-color: #ee6366;
 }
