@@ -1,47 +1,24 @@
-import { functions } from './functions.js';
-const buttons = document.querySelectorAll('.buttons button');
-const screenNumber = document.querySelector('#number');
+import { calculate } from './functions.js';
+const inputButtons = document.querySelectorAll('button[data-key]');
+const opButtons = document.querySelectorAll('button[data-op]');
+const screenResult = document.querySelector('#number');
 const screenHistory = document.querySelector('#history');
 
-let currentNumber = 0;
-let history = [];
+inputButtons.forEach((btn) =>
+  btn.addEventListener('click', (e) => {
+    screenHistory.innerText += e.target.dataset.key;
+  })
+);
 
-function updateScreen() {
-  screenNumber.textContent = currentNumber;
-  screenHistory.textContent = history.join(' ');
-}
-
-function addNumberToScreen(number) {
-  if (currentNumber === 0) {
-    currentNumber = number;
-  } else {
-    currentNumber = `${currentNumber}${number}`;
-  }
-  updateScreen();
-}
-
-for (let i = 0; i <= 9; i++) {
-  buttons[i].addEventListener('click', addNumberToScreen.bind(null, i));
-}
-
-for (let i = 11; i <= 14; i++) {
-  buttons[i].addEventListener('click', (e) => {
-    history.push(currentNumber, e.target.dataset.op);
-    currentNumber = 0;
-    updateScreen();
-  });
-}
-
-buttons[15].addEventListener('click', () => {
-  history.push(currentNumber);
-  currentNumber = functions[history[history.length - 2]](history[history.length - 3], history[history.length - 1]);
-  updateScreen();
-  history.push(currentNumber);
+opButtons[0].addEventListener('click', () => {
+  screenHistory.innerText = screenHistory.innerText.slice(0, -1);
 });
 
-buttons[16].addEventListener('click', () => {
-  currentNumber = 0;
-  history = [];
-  operation = null;
-  updateScreen();
+opButtons[1].addEventListener('click', () => {
+  screenHistory.innerText = '';
+  screenResult.innerText = '';
+});
+
+opButtons[3].addEventListener('click', () => {
+  screenResult.innerText = calculate(screenHistory.innerText);
 });
