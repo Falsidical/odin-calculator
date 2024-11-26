@@ -38,17 +38,22 @@ h1 {
   border-radius: 12px;
   padding: 8px;
   margin-bottom: 24px;
+  width: 400px;
 }
 
 #history {
   font-size: 24px;
   height: 30px;
+  overflow-x: scroll;
+  scrollbar-width: none;
 }
 
 #number {
   text-align: right;
   font-size: 48px;
   height: 60px;
+  overflow-x: scroll;
+  scrollbar-width: none;
 }
 
 .buttons {
