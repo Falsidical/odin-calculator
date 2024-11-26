@@ -6,19 +6,19 @@ const screenExpression = document.querySelector('#history');
 
 inputButtons.forEach((btn) =>
   btn.addEventListener('click', (e) => {
-    screenHistory.innerText += e.target.dataset.key;
+    screenExpression.innerText += e.target.dataset.key;
   })
 );
 
 opButtons[0].addEventListener('click', () => {
-  screenHistory.innerText = screenHistory.innerText.slice(0, -1);
+  screenExpression.innerText = screenExpression.innerText.slice(0, -1);
 });
 
 opButtons[1].addEventListener('click', () => {
-  screenHistory.innerText = '';
-  screenResult.innerText = '';
+  screenExpression.innerText = '';
+  screenResult.innerText = '0';
 });
 
 opButtons[3].addEventListener('click', () => {
-  screenResult.innerText = calculate(screenHistory.innerText);
+  screenResult.innerText = calculate(screenExpression.innerText);
 });

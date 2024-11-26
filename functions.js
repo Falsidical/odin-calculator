@@ -50,10 +50,31 @@ function evaluateRPN(tokens) {
       outputQueue.push(operators[token].calculate(n1, n2));
     }
   });
-
   return outputQueue;
 }
 
 export function calculate(expression) {
-  return evaluateRPN(RPNParser(expression));
+  return evaluateRPN(RPNParser(addSpaces(expression)));
+}
+
+function addSpaces(expression) {
+  let result = '';
+  let isPreviousCharOperator = true;
+  for (let i = 0; i < expression.length; i++) {
+    let item = expression[i];
+    if (!isNaN(item) || item === '.') {
+      result += item;
+      isPreviousCharOperator = false;
+    } else if (item === '-') {
+      if (isPreviousCharOperator) {
+        result += item;
+      } else {
+        result += ` ${item} `;
+      }
+    } else {
+      result += ` ${item} `;
+      isPreviousCharOperator = true;
+    }
+  }
+  return result.trim().replace(/\s+/g, ' ');
 }
