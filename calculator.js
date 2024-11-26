@@ -30,6 +30,6 @@ opButtons[3].addEventListener('click', () => {
   screenResult.innerText = '0';
 });
 
-opButtons[4].addEventListener('click', () => {
+opButtons[5].addEventListener('click', () => {
   screenResult.innerText = calculate(screenExpression.innerText);
 });
