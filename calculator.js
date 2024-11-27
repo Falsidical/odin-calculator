@@ -4,6 +4,7 @@ const opButtons = document.querySelectorAll('button[data-op]');
 const screenResult = document.querySelector('#number');
 const screenExpression = document.querySelector('#history');
 const scrollDistance = '100';
+let ans = 0;
 
 inputButtons.forEach((btn) =>
   btn.addEventListener('click', (e) => {
@@ -30,6 +31,11 @@ opButtons[3].addEventListener('click', () => {
   screenResult.innerText = '0';
 });
 
+opButtons[4].addEventListener('click', () => {
+  screenExpression.innerText += ans;
+});
+
 opButtons[5].addEventListener('click', () => {
-  screenResult.innerText = calculate(screenExpression.innerText);
+  ans = calculate(screenExpression.innerText);
+  screenResult.innerText = ans;
 });
